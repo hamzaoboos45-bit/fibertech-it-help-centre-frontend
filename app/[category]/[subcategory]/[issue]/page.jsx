@@ -261,10 +261,7 @@ export default function IssuePage({ params }) {
 
             setSubmitted({
                 success: true,
-                ticketId:
-                    result.ticket_id ||
-                    result.ticketId ||
-                    result.id,
+                ticketId: result.ticket_id,
                 status: result.status || "OPEN",
             });
 
