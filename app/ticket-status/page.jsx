@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowLeft, CircleAlert, CircleCheck, Clock3, Search, Ticket } from "lucide-react";
 import Logo from "../../components/Logo";
@@ -19,7 +19,7 @@ function normalizeStatus(status) {
     return String(status || "OPEN").toUpperCase().replace(/\s+/g, "_");
 }
 
-export default function TicketStatusPage() {
+function TicketStatusContent() {
     const searchParams = useSearchParams();
     const queryTicket = searchParams.get("ticket") || "";
     const [ticketId, setTicketId] = useState(queryTicket);
@@ -177,5 +177,23 @@ export default function TicketStatusPage() {
                 </div>
             </section>
         </main>
+    );
+}
+
+export default function TicketStatusPage() {
+    return (
+        <Suspense
+            fallback={
+                <main className="min-h-screen bg-slate-100">
+                    <div className="flex min-h-screen items-center justify-center">
+                        <p className="text-sm font-semibold text-slate-500">
+                            Loading ticket status...
+                        </p>
+                    </div>
+                </main>
+            }
+        >
+            <TicketStatusContent />
+        </Suspense>
     );
 }
