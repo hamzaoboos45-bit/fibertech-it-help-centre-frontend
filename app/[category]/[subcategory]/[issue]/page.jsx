@@ -260,10 +260,10 @@ export default function IssuePage({ params }) {
             });
 
             setSubmitted({
-                success: true,
-                ticketId: result.ticket_id,
-                status: result.status || "OPEN",
-            });
+    success: true,
+    ticketId: result.ticket_id,
+    status: result.status || "OPEN",
+});
 
             setDescription("");
         } catch (err) {
